@@ -1,0 +1,417 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: auto;
+    min-height: 0;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #fff;
+    background-color: #202020;
+    margin: 0;
+}
+
+.container {
+    flex: 1;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 64px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+
+body .container header{
+    background: url(images/sakura1.jpg) center / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px;
+    padding: 20px 50px 60px;
+    border-radius: 12px;
+}
+
+body .container header .category{
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+}
+
+body .container header .info{
+    text-align: center;
+}
+
+body .container header .info .tags i{
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+body .container header .info .tags span{
+    font-size: 0.8rem;
+}
+
+body .container header .info .title{
+    margin: 20px 0;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+body .container header .info .subtitle{
+    min-width: 70%;
+    margin: 0 auto 20px;
+    font-size: 1rem;
+}
+
+body .movies .item{
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    margin: 20px;
+    height: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.text, .image{
+    flex: 1;
+}
+
+body .movies .item .text{
+    flex: 1;
+    text-align: justify;
+    word-spacing: 2px;
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+body .movies .item .image{
+    overflow: hidden;
+    flex: 1;
+    animation: zoomIn 1s ease-out forwards;
+}
+
+body .movies .item .image img{
+    /*margin-top: 70px;*/
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+h2{
+    font-size: 30px;
+}
+
+body .movies .item .image img:hover{
+    transform: scale(1.05);
+}
+
+
+/*Keyframes*/
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+    height: auto;
+  }
+
+  .container header {
+    padding: 20px;
+    min-height: auto;
+    text-align: center;
+  }
+
+  .movies .item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .movies .item .image,
+  .movies .item .text {
+    width: 100%;
+  }
+
+  .movies .item .image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .movies .item .text {
+    padding-top: 10px;
+    text-align: justify;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .movie-title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .movies .item {
+    flex-direction: column;
+  }
+
+  /* Target the second item specifically and reverse it back on mobile */
+  .movies .item:nth-child(2) {
+    flex-direction: column-reverse;
+  }
+}
+
+/* === Music Player Styles === */
+/* === Cool Floating Music Player === */
+
+.music-toggle {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    padding: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.music-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+}
+
+.music-player {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    background: rgba(32, 32, 32, 0.95);
+    padding: 12px 16px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    display: none;
+    z-index: 999;
+    animation: fadeSlideIn 0.3s ease forwards;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.music-player audio {
+    width: 240px;
+    filter: brightness(90%);
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating Music Player - Sakura Theme */
+.floating-music-player {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url('images/sakura.jpg') center/cover no-repeat;
+    box-shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.25), 0 1.5px 8px 0 rgba(255, 182, 193, 0.10);
+    border-radius: 28px;
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+    min-width: 90px;
+    gap: 22px;
+    font-family: 'Open Sans', sans-serif;
+    border: 2px solid #f9c5d1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s, box-shadow 0.3s;
+}
+.floating-music-player.show {
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 12px 36px 0 rgba(255, 182, 193, 0.35), 0 2px 12px 0 rgba(255, 182, 193, 0.18);
+}
+.floating-music-player .music-btn {
+    background: linear-gradient(135deg, #f9c5d1 0%, #ffe4ef 100%);
+    border: 2px solid #f7a6c2;
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(255, 182, 193, 0.18);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    color: #d72660;
+}
+.floating-music-player .music-btn:hover {
+    background: linear-gradient(135deg, #ffe4ef 0%, #f9c5d1 100%);
+    transform: scale(1.10);
+    box-shadow: 0 4px 18px rgba(255, 182, 193, 0.25);
+}
+.floating-music-player .music-title {
+    color: #d72660;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 36px;
+    text-align: center;
+    text-shadow: 0 1px 4px #fff6fa;
+}
+.floating-music-player audio {
+    display: none;
+}
+
+.right-hover-zone {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 100vh;
+    z-index: 1100;
+    cursor: pointer;
+    background: transparent;
+}
+
+.music-player-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+.music-list-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.7rem;
+    color: #d72660;
+    transition: color 0.2s;
+}
+.music-list-btn:hover {
+    color: #f7a6c2;
+}
+.music-list-card {
+    position: absolute;
+    right: 110%;
+    top: 0;
+    min-width: 180px;
+    background: #fff6fa;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(255, 182, 193, 0.18);
+    border: 2px solid #f9c5d1;
+    padding: 16px 0 8px 0;
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: fadeSlideIn 0.3s;
+}
+.music-list-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #d72660;
+    padding: 0 16px 8px 16px;
+    border-bottom: 1px solid #f9c5d1;
+    margin-bottom: 6px;
+}
+.music-list-item {
+    padding: 8px 16px;
+    font-size: 1rem;
+    color: #d72660;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.18s, color 0.18s;
+}
+.music-list-item:hover {
+    background: #f9c5d1;
+    color: #fff;
+}
+.site-footer {
+    width: 100%;
+    padding: 8px 0;
+    text-align: center;
+    background: #36363565;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-top: 1px solid #36363565;
+    margin-top: auto; 
+}
+
+.site-footer a {
+    color: inherit;
+    text-decoration: none;
+     /* disables clicking */
+    cursor: default;      /* makes it look like normal text */
+  }
+  
